@@ -6,7 +6,6 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ color, children, ...props }: Props) {
-  console.log(color);
   return (
     <button
       className={`${color} rounded-md p-2 font-bold text-white transition ease-in-out delay-10 m-2`}

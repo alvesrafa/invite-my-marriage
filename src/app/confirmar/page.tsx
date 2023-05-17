@@ -29,7 +29,7 @@ export default function ConfirmationPage() {
             nomes na lista.
           </p>
           <p>🚨🚨Sem o nomes da lista, não entrará.🚨🚨</p>
-          <Button color="bg-blue-400" onClick={onClickKeepGoing}>
+          <Button color="bg-blue-100" onClick={onClickKeepGoing}>
             Continuar
           </Button>
         </div>
@@ -43,7 +43,7 @@ export default function ConfirmationPage() {
             cerimônia.
           </p>
           <div className="flex flex-col lg:flex-row lg:justify-around lg:p-4">
-            <Button color="bg-blue-400" onClick={toConfirm}>
+            <Button color="bg-blue-100" onClick={toConfirm}>
               Vou, com certeza! 😍
             </Button>
             <Button color="bg-red-400" onClick={toDeny}>
