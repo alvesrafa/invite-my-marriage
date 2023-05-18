@@ -9,7 +9,7 @@ export default async function Home() {
       <Image src={nomesImg} alt="Imagem escrito Rafael e Lívia" />
 
       <Button color="bg-blue-200">
-        <Link href="/bem-vindo/aa">Teste</Link>
+        <Link href="/convite/8dfee10c-96c2-45c7-a780-416838db279a">Teste</Link>
       </Button>
     </div>
   );
