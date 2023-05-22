@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="flex flex-col items-center">
       <Image src={nomesImg} alt="Imagem escrito Rafael e Lívia" />

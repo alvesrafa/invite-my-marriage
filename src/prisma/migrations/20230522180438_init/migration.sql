@@ -5,6 +5,7 @@ CREATE TABLE "Invite" (
     "guests" TEXT,
     "quantity" INTEGER NOT NULL DEFAULT 1,
     "answered" BOOLEAN NOT NULL DEFAULT false,
+    "answer" TEXT,
 
     CONSTRAINT "Invite_pkey" PRIMARY KEY ("id")
 );

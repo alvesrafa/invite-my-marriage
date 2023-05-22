@@ -1,20 +1,36 @@
 "use client";
 import { Button } from "@/components/Button";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ConfirmationPage() {
+interface Props {
+  params: any;
+  searchParams: { guestId: string };
+}
+
+export default function ConfirmationPage({ searchParams }: Props) {
   const router = useRouter();
+  const { guestId } = searchParams || {};
   const [step, setStep] = useState(0);
 
-  function toConfirm() {
-    // Tratar no banco a pessoa
-    router.push("/confirmado");
+  async function toConfirm() {
+    try {
+      // Tratar no banco a pessoa
+      const response = await axios.patch(`/api/invite/${guestId}`, {
+        answer: "yes",
+      });
+      router.push("/confirmado");
+    } catch (error) {}
   }
 
-  function toDeny() {
-    // Tratar no banco a pessoa
-    router.push("/negado");
+  async function toDeny() {
+    try {
+      const response = await axios.patch(`/api/invite/${guestId}`, {
+        answer: "no",
+      });
+      router.push("/negado");
+    } catch (error) {}
   }
   function onClickKeepGoing() {
     setStep((prevStep) => prevStep + 1);
