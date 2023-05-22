@@ -1,6 +1,8 @@
 import { Guest } from "./page";
 
-export function renderGuestMessage(guest: Guest) {
+export function renderGuestMessage(guest?: Guest) {
+  if (!guest) return "";
+
   if (guest.guestsQuantity === 1) {
     return `Você e ${guest.guests} estão convidados(as) para o nosso casamento!`;
   } else if (guest.guestsQuantity > 1) {

@@ -5,7 +5,6 @@ import axios from "axios";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { renderGuestMessage } from "./utils";
 
@@ -16,44 +15,48 @@ export interface Guest {
   guestsQuantity: number;
   answered: boolean;
 }
+interface Props {
+  params: Params;
+}
 
-export default async function Invite({ params }: Params) {
-  const { guestId } = params;
-  const [invitedPerson, setInvitedPerson] = useState<Guest>({
-    id: "a",
-    answered: false,
-    guestsQuantity: 2,
-    name: "asdas",
-    guests: "1231",
-  });
-  async function getGuestById(id: string) {
-    try {
-      console.log("vai tentar chamar", id);
-      const response = await axios.get(`/api/invite/${id}`);
-      console.log("response", response.data);
-      // setInvitedPerson(response.data);
-    } catch (error) {
-      console.log("error", error);
-      throw error;
-    }
-  }
+export default async function Invite(props: Props) {
+  const [loading, setLoading] = useState(true);
+  const [invitedPerson, setInvitedPerson] = useState<Guest>();
+
+  const { guestId } = props?.params || {};
 
   useEffect(() => {
-    if (!guestId) {
-      return redirect("/");
-    }
-    getGuestById(guestId);
-  }, [guestId]);
+    // getGuestById(guestId);
+  }, []);
 
-  if (invitedPerson.answered) {
-    return <h1>Já respondido</h1>;
+  async function getGuestById(id: string) {
+    if (!id) return;
+    setLoading(true);
+    try {
+      console.log("vai chamar");
+      const response = await axios.get(`/api/invite/${id}`);
+      console.log("Setando setInvitedPerson", response.data);
+      setInvitedPerson(response.data);
+      console.log("deu o set");
+    } catch (error) {
+      console.log("error", error);
+      setInvitedPerson(undefined);
+      throw error;
+    } finally {
+      console.log("ta no finally");
+      setLoading(false);
+    }
   }
 
   return (
     <div className="flex flex-col items-center">
       <Image src={nomesImg} alt="Imagem escrito Rafael e Lívia" />
 
-      <p className="text-center">{renderGuestMessage(invitedPerson)}</p>
+      {loading ? (
+        <p>Buscando informações do convite</p>
+      ) : (
+        <p className="text-center">{renderGuestMessage(invitedPerson)}</p>
+      )}
 
       <div>
         <p>FOTO DO CONVITE GRANDE ou SÓ INFO</p>
