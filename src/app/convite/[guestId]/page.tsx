@@ -1,7 +1,7 @@
-import { find } from "@/api/invite";
 import nomesImg from "@/assets/nomes.png";
 import { Button } from "@/components/Button";
 import { marriageDate, maxDateToAccept } from "@/constants/dates";
+import { find } from "@/server/invite";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";

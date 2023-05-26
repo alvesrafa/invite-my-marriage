@@ -21,3 +21,9 @@ model Invite {
   answered Boolean @default(false)
   answer   String?
 }
+
+model User {
+  id       String @id @default(uuid())
+  username String
+  password String
+}

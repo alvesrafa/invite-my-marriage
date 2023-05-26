@@ -12,14 +12,16 @@
     "seed:run": "prisma db seed"
   },
   "prisma": {
-    "schema": "src/api/prisma/schema.prisma",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/api/prisma/seed.ts"
+    "schema": "src/server/prisma/schema.prisma",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/server/prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
+    "@types/bcrypt": "^5.0.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",

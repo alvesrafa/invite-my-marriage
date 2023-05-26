@@ -1,4 +1,4 @@
-import { findAll } from "@/api/invite";
+import { findAll } from "@/server/invite";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get("page"));
     const size = Number(searchParams.get("size"));
-    const answered = Boolean(searchParams.get("answered"));
+    const answered = searchParams.get("answered") === "false" ? false : true;
 
     const [invites, total] = await findAll({
       page: page || 1,

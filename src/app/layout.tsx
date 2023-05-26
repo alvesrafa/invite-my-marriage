@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={inter.className}>
         <main className="flex min-h-screen flex-col items-center justify-center p-2 lg:p-18 xl:p-24 bg-gradient-to-bl from-blue-400 to-blue-200 overflow-hidden">
-          <div className="flex flex-col items-center lg:max-w-screen-lg lg:max-h-screen-sm overflow-y-auto">
+          <div className="flex flex-col items-center lg:w-[50rem] sm:w-screen lg:max-h-screen-sm overflow-y-auto">
             {children}
           </div>
         </main>

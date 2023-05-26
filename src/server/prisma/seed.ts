@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,13 @@ async function main() {
         answered: false,
       },
     ],
+  });
+
+  const username = process.env.MARRIEAGE_USERNAME!;
+  const password = bcrypt.hashSync(process.env.MARRIEAGE_PASSWORD!, 7);
+  console.log({ username, password });
+  await prisma.user.create({
+    data: { username, password },
   });
 }
 main()

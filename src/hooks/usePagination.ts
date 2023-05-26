@@ -14,7 +14,7 @@ export function usePagination({ pageSize = 4 }: Params) {
   function getMorePage(currentPage: number, totalPages: number) {
     setPagination((oldState) => ({
       ...oldState,
-      hasMore: oldState.currentPage <= totalPages,
+      hasMore: currentPage < totalPages,
       currentPage,
     }));
   }

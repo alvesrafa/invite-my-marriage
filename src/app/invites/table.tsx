@@ -9,7 +9,7 @@ interface Props {}
 
 export function InviteTable({}: Props) {
   const [invites, setInvites] = useState<Invite[]>([]);
-  const pageSize = 6;
+  const pageSize = 2;
   const { getMorePage, hasMore, currentPage } = usePagination({
     pageSize,
   });
@@ -39,7 +39,7 @@ export function InviteTable({}: Props) {
       const { invites: newInvites, total } = await response.json();
 
       const totalPages = Math.round(Math.ceil(total / pageSize));
-
+      console.log("totalPages", totalPages);
       setInvites(newInvites);
       getMorePage(page, totalPages);
     } catch (error) {
@@ -64,7 +64,7 @@ export function InviteTable({}: Props) {
           Respondidos?
         </span>
       </label>
-      {invites.length > 0 ? (
+      {!loading && invites.length > 0 ? (
         <table className="w-full table-fixed">
           <thead>
             <tr>

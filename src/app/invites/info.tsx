@@ -1,4 +1,4 @@
-import { findInfo } from "@/api/invite";
+import { findInfo } from "@/server/invite";
 
 export default async function Info() {
   const test = async () => {

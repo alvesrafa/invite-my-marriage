@@ -1,4 +1,4 @@
-import { findInfo } from "@/api/invite";
+import { findInfo } from "@/server/invite";
 import { InviteTable } from "./table";
 
 export default async function Invites() {

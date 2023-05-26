@@ -22,10 +22,11 @@ export async function find(inviteId: string) {
 
 export async function findAll(filtros?: PaginationParams) {
   const { page, size, answered } = filtros || {};
+
   const invites = await prisma.invite.findMany(
     page && size
       ? {
-          skip: page * size,
+          skip: (page - 1) * size,
           take: size,
           where: {
             answered: answered,

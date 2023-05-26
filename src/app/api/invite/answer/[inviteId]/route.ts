@@ -1,5 +1,5 @@
-import { answerInvite } from "@/api/invite";
-import { InputInviteDto } from "@/api/invite.dto";
+import { answerInvite } from "@/server/invite";
+import { InputInviteDto } from "@/server/invite.dto";
 import { NextRequest, NextResponse } from "next/server";
 interface RequestParams {
   params: {
