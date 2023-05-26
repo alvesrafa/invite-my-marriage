@@ -12,8 +12,8 @@
     "seed:run": "prisma db seed"
   },
   "prisma": {
-    "schema": "src/prisma/schema.prisma",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/prisma/seed.ts"
+    "schema": "src/api/prisma/schema.prisma",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/api/prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
