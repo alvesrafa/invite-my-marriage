@@ -1,8 +1,7 @@
 "use client";
 import { Button } from "@/components/Button";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ActionButtons } from "./actionButtons";
 
 interface Props {
   params: any;
@@ -10,28 +9,9 @@ interface Props {
 }
 
 export default function ConfirmationPage({ searchParams }: Props) {
-  const router = useRouter();
   const { guestId } = searchParams || {};
   const [step, setStep] = useState(0);
 
-  async function toConfirm() {
-    try {
-      // Tratar no banco a pessoa
-      const response = await axios.patch(`/api/invite/${guestId}`, {
-        answer: "yes",
-      });
-      router.push("/confirmado");
-    } catch (error) {}
-  }
-
-  async function toDeny() {
-    try {
-      const response = await axios.patch(`/api/invite/${guestId}`, {
-        answer: "no",
-      });
-      router.push("/negado");
-    } catch (error) {}
-  }
   function onClickKeepGoing() {
     setStep((prevStep) => prevStep + 1);
   }
@@ -58,14 +38,7 @@ export default function ConfirmationPage({ searchParams }: Props) {
             Ao clicar no botão você está confirmando que irá para a nossa
             cerimônia.
           </p>
-          <div className="flex flex-col lg:flex-row lg:justify-around lg:p-4">
-            <Button color="bg-blue-100" onClick={toConfirm}>
-              Vou, com certeza! 😍
-            </Button>
-            <Button color="bg-red-400" onClick={toDeny}>
-              Não vou conseguir 😢
-            </Button>
-          </div>
+          <ActionButtons guestId={guestId} />
         </div>
       );
 

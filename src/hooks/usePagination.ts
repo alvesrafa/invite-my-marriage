@@ -6,16 +6,16 @@ type Params = {
 
 export function usePagination({ pageSize = 4 }: Params) {
   const [pagination, setPagination] = useState({
-    pageNumber: 1,
     pageSize,
     hasMore: true,
+    currentPage: 1,
   });
 
-  function getMorePage(totalPages: number) {
+  function getMorePage(currentPage: number, totalPages: number) {
     setPagination((oldState) => ({
       ...oldState,
-      hasMore: oldState.pageNumber <= totalPages,
-      pageNumber: oldState.pageNumber + 1,
+      hasMore: oldState.currentPage <= totalPages,
+      currentPage,
     }));
   }
 

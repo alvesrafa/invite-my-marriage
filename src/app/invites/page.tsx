@@ -1,45 +1,19 @@
-import { findAll, findInfo } from "@/api/invite";
+import { findInfo } from "@/api/invite";
+import { InviteTable } from "./table";
 
 export default async function Invites() {
-  // const {} = usePagination({ pageSize: 10 });
-  // const {} = useSession()
   const { answered, answeredYes, answeredNo, notAnswered } = await findInfo();
 
-  const invites = await findAll();
-
   return (
-    <div>
+    <div className="w-full">
       <div className="mb-4">
-        <p>Quantidade respondida: {answered}</p>
-        <p>Quantidade que vai: {answeredYes}</p>
-        <p>Quantidade negada: {answeredNo}</p>
-        <p>Falta responder: {notAnswered}</p>
+        <p>Qnt. respondida: {answered}</p>
+        <p>Qnt. que vai: {answeredYes}</p>
+        <p>Qnt. negada: {answeredNo}</p>
+        <p>Não respondido: {notAnswered}</p>
       </div>
 
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Quantidade de convidados</th>
-            <th>Vai?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {invites.map((invite) => (
-            <tr key={invite.id}>
-              <td>{invite.name}</td>
-              <td>{invite.quantity}</td>
-              <td>
-                {!invite?.answer
-                  ? "---"
-                  : invite?.answer === "yes"
-                  ? "Sim"
-                  : "Não"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <InviteTable />
     </div>
   );
 }

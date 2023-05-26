@@ -1,4 +1,11 @@
 import prisma from "@/lib/prisma";
+import { InputInviteDto } from "./invite.dto";
+
+interface PaginationParams {
+  page?: number;
+  size?: number;
+  answered: boolean;
+}
 
 export async function find(inviteId: string) {
   const invite = await prisma.invite.findFirst({
@@ -12,23 +19,27 @@ export async function find(inviteId: string) {
 
   return invite;
 }
-interface PaginationParams {
-  page?: number;
-  size?: number;
-}
 
 export async function findAll(filtros?: PaginationParams) {
-  const { page, size } = filtros || {};
+  const { page, size, answered } = filtros || {};
   const invites = await prisma.invite.findMany(
     page && size
       ? {
           skip: page * size,
           take: size,
+          where: {
+            answered: answered,
+          },
         }
       : undefined
   );
+  const total = await prisma.invite.count({
+    where: {
+      answered: answered,
+    },
+  });
 
-  return invites;
+  return [invites, total];
 }
 
 export async function findInfo() {
@@ -64,4 +75,24 @@ export async function findInfo() {
     answeredNo,
     notAnswered,
   };
+}
+
+export async function answerInvite({ id, answer }: InputInviteDto) {
+  const invite = await prisma.invite.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!invite || !invite.id) throw new Error("Convite não encontrado");
+
+  invite.answered = true;
+  invite.answer = answer;
+
+  await prisma.invite.update({
+    data: invite,
+    where: {
+      id: invite.id,
+    },
+  });
 }
